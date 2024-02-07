@@ -1,5 +1,7 @@
-use axum::{routing::get, Router};
+use axum::{routing::post, Router};
+
+use crate::controllers;
 
 pub fn authentication() -> Router {
-    Router::new().route("/auth", get(|| async { "Hello, World! Authentication" }))
+    Router::new().route("/register", post(controllers::authentication::register))
 }
