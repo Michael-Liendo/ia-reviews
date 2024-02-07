@@ -10,6 +10,7 @@ members = ["migration"]
 [dependencies]
 axum = "0.7.4"
 chrono = { version = "0.4.33", features = ["serde"] }
+dotenv = "0.15.0"
 sea-orm = { version = "0.12.14", features = [
   "sqlx-postgres",
   "runtime-tokio-rustls",
