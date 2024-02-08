@@ -10,7 +10,10 @@ name = "entity"
 path = "src/lib.rs"
 
 [dependencies]
-serde = { version = "1", features = ["derive"] }
-
-[dependencies.sea-orm]
-version = "0.12.14"
+sea-orm = { workspace = true, features = [
+  "sqlx-postgres",
+  "runtime-tokio-rustls",
+  "macros",
+  "with-chrono",
+] }
+serde = { workspace = true, features = ["derive"] }
