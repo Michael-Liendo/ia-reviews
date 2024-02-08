@@ -2,7 +2,7 @@ use std::env;
 
 use axum::Router;
 use dotenv::dotenv;
-use sea_orm::{Database, DatabaseConnection};
+use sea_orm::Database;
 
 mod controllers;
 mod routes;
@@ -21,11 +21,11 @@ async fn main() {
         .expect("Database connection failed");
     println!("->> DATABASE CONNECTED\n");
 
-    let state = AppState { conn };
+    let state = types::state::AppState { conn };
 
     // build our application with a single route
     let app: Router = Router::new()
-        .nest("/api", routes::auth::authentication())
+        .nest("/api", routes::create_routes())
         .with_state(state);
 
     // run our app with hyper, listening globally on port 3000
@@ -36,9 +36,4 @@ async fn main() {
     axum::serve(listener, app)
         .await
         .expect("Failed to initialize the API server");
-}
-
-#[derive(Clone)]
-struct AppState {
-    conn: DatabaseConnection,
 }
