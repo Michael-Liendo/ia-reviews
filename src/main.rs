@@ -3,7 +3,6 @@ use std::env;
 use axum::Router;
 use dotenv::dotenv;
 use sea_orm::{Database, DatabaseConnection};
-use std::sync::Arc;
 
 mod controllers;
 mod routes;
@@ -20,11 +19,12 @@ async fn main() {
     let conn = Database::connect(db_url)
         .await
         .expect("Database connection failed");
+    println!("->> DATABASE CONNECTED\n");
 
     let state = AppState { conn };
 
     // build our application with a single route
-    let app = Router::new()
+    let app: Router = Router::new()
         .nest("/api", routes::auth::authentication())
         .with_state(state);
 
