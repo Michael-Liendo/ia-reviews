@@ -5,6 +5,7 @@ use dotenv::dotenv;
 use sea_orm::Database;
 
 mod controllers;
+mod error;
 mod routes;
 mod types;
 

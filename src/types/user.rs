@@ -6,7 +6,6 @@ use chrono::{DateTime, Utc};
 pub struct NewUserDto {
     pub name: String,
     pub surname: String,
-    pub username: String,
     pub email: String,
     pub password: String,
 }
@@ -16,7 +15,6 @@ pub struct User {
     pub id: i32,
     pub name: String,
     pub surname: String,
-    pub username: String,
     pub email: String,
     pub password: String,
     pub created_at: DateTime<Utc>,
