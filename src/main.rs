@@ -6,6 +6,7 @@ use sea_orm::Database;
 
 mod controllers;
 mod error;
+mod repository;
 mod routes;
 mod types;
 
