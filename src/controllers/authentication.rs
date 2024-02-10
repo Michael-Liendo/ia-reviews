@@ -14,7 +14,7 @@ pub async fn register(Json(payload): Json<NewUserDto>) -> Result<impl IntoRespon
             name: "Michael".to_string(),
             surname: "Liendo".to_string(),
             email: "michael".to_string(),
-            password: "hello".to_string(),
+            password_hash: "hello".to_string(),
             created_at: chrono::Utc::now(),
         }),
     ))
