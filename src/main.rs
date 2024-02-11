@@ -5,7 +5,10 @@ use dotenv::dotenv;
 use sea_orm::Database;
 
 mod controllers;
+mod error;
+mod repository;
 mod routes;
+mod services;
 mod types;
 
 #[tokio::main]

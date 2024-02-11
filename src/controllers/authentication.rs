@@ -1,16 +1,29 @@
-use axum::Json;
+use crate::{
+    error::Errors,
+    services,
+    types::{
+        state::AppState,
+        user::{NewUserDto, User},
+    },
+};
+use anyhow::Result;
+use axum::{extract::State, http::StatusCode, response::IntoResponse, Json};
 
-use crate::types::user::{NewUserDto, User};
-
-pub async fn register(Json(payload): Json<NewUserDto>) -> Json<User> {
-    println!("Hello");
-    Json(User {
-        id: 1,
-        name: payload.name,
-        surname: payload.surname,
-        username: payload.username,
-        email: payload.email,
-        password: payload.password,
-        created_at: chrono::Utc::now(),
-    })
+pub async fn register(
+    State(state): State<AppState>,
+    Json(payload): Json<NewUserDto>,
+) -> Result<impl IntoResponse, Errors> {
+    // todo: implement service and repository functionality
+    services::User::create_user(&state.conn, payload).await?;
+    Ok((
+        StatusCode::OK,
+        Json(User {
+            id: 32,
+            name: "Michael".to_string(),
+            surname: "Liendo".to_string(),
+            email: "michael".to_string(),
+            password_hash: "hello".to_string(),
+            created_at: chrono::Utc::now(),
+        }),
+    ))
 }
