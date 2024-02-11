@@ -23,7 +23,7 @@ impl IntoResponse for Errors {
                 error!("Database Error: {:#?}", e);
                 (
                     StatusCode::CONFLICT,
-                    format!("Error executing a database query"),
+                    "Error executing a database query".to_string(),
                 )
                     .into_response()
             }

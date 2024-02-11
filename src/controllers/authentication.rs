@@ -1,12 +1,20 @@
 use crate::{
     error::Errors,
-    types::user::{NewUserDto, User},
+    services,
+    types::{
+        state::AppState,
+        user::{NewUserDto, User},
+    },
 };
 use anyhow::Result;
-use axum::{http::StatusCode, response::IntoResponse, Json};
+use axum::{extract::State, http::StatusCode, response::IntoResponse, Json};
 
-pub async fn register(Json(payload): Json<NewUserDto>) -> Result<impl IntoResponse, Errors> {
+pub async fn register(
+    State(state): State<AppState>,
+    Json(payload): Json<NewUserDto>,
+) -> Result<impl IntoResponse, Errors> {
     // todo: implement service and repository functionality
+    services::User::create_user(&state.conn, payload).await?;
     Ok((
         StatusCode::OK,
         Json(User {

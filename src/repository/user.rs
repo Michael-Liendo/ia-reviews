@@ -2,13 +2,9 @@ use crate::types::user::User as UserType;
 use ::entity::user as UserEntity;
 use sea_orm::{ActiveModelTrait, DbConn, DbErr, Set};
 
-pub struct User {
-    mutation: Mutation,
-}
+pub struct User;
 
-struct Mutation;
-
-impl Mutation {
+impl User {
     pub async fn create_user(
         db: &DbConn,
         user: UserType,
